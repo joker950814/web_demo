@@ -12,6 +12,7 @@ def register(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         print('username: %s password: %s' % (username, password))
+        print(123)
 
         # TODO: 进行注册业务处理
 
