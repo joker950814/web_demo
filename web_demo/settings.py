@@ -39,13 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 注册子项目应用
     'helloworld.apps.HelloworldConfig',
+
+    # 注册新的项目子应用
+
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 关闭 Django 框架自带的 CSRF 保护机制
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -56,7 +61,7 @@ ROOT_URLCONF = 'web_demo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,8 +82,18 @@ WSGI_APPLICATION = 'web_demo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 使用 mysql 数据库
+        'ENGINE': 'django.db.backends.mysql',
+        # 数据库服务的IP, 注意改给自己的
+        'HOST': 'localhost',
+        # 数据库服务的端口, mysql服务的默认端口为 3306
+        'PORT': 3306,
+        # 链接数据库服务的用户名
+        'USER': 'root',
+        # 链接数据库服务的密码
+        'PASSWORD': '123456',
+        # 使用的数据库名称
+        'NAME': 'web_db',
     }
 }
 
